@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História de Amor ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f5f3fd;
+            --rose: #b8a5d4;
+            --deep-rose: #7d6b9d;
+            --charcoal: #2d2433;
+            --soft-shadow: rgba(125, 107, 157, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #ebe5f5 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        .romantic-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .heart { position: absolute; font-size: 20px; opacity: 0; animation: floatHeart 15s infinite ease-in-out; }
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        header { text-align: center; padding: 60px 20px 40px; }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--deep-rose);
+            letter-spacing: 2px;
+        }
+        .subtitle { font-size: 1.3rem; color: var(--rose); font-style: italic; letter-spacing: 3px; }
+        .music-control {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--rose);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--soft-shadow);
+        }
+        .music-control:hover { transform: scale(1.1); background: var(--rose); }
+        .music-control svg { width: 30px; height: 30px; fill: var(--deep-rose); transition: fill 0.3s ease; }
+        .music-control:hover svg { fill: white; }
+        .timer-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--rose);
+            border-radius: 30px;
+            padding: 50px 40px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 10px 40px var(--soft-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .timer-section::before {
+            content: '♡';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: var(--rose);
+            background: var(--cream);
+            padding: 0 20px;
+        }
+        .timer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--deep-rose);
+            margin-bottom: 30px;
+        }
+        .timer-display { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .time-unit {
+            background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px;
+            min-width: 120px;
+        }
+        .time-value { font-size: 3rem; font-weight: 600; font-family: 'Cormorant Garamond', serif; display: block; }
+        .time-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; }
+        .message-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-left: 5px solid var(--rose);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 8px 30px var(--soft-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .message-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 8rem;
+            color: var(--rose);
+            opacity: 0.2;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+        .message-text { 
+            font-size: 1.4rem; 
+            line-height: 1.8; 
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .message-signature {
+            text-align: right;
+            margin-top: 25px;
+            font-size: 1.2rem;
+            color: var(--deep-rose);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        .divider { text-align: center; margin: 50px 0; color: var(--rose); font-size: 2rem; }
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            text-align: center;
+            color: var(--deep-rose);
+            margin: 60px 0 40px;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px var(--soft-shadow);
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.05);
+        }
+        .slide.active { opacity: 1; }
+        .slide img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+        }
+        .slide .error-msg {
+            color: #999;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 20px;
+            color: var(--deep-rose);
+        }
+        .nav-button:hover { background: var(--rose); color: white; }
+        .nav-button.prev { left: 20px; }
+        .nav-button.next { right: 20px; }
+        .slide-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid white;
+            cursor: pointer;
+        }
+        .slide-dot.active { background: white; }
+        footer { text-align: center; padding: 60px 20px; font-style: italic; color: var(--rose); }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1rem; }
+            .slideshow-container { height: 400px; }
+            .time-unit { min-width: 80px; padding: 15px 20px; }
+            .time-value { font-size: 2rem; }
+            .message-text { font-size: 1.1rem; }
+            .message-card { padding: 30px 25px; }
+            .message-card::before { font-size: 5rem; top: -10px; left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="romantic-hearts" id="hearts"></div>
+    
+    <div class="music-control" id="musicToggle" title="Clique para tocar música">
+        <svg id="playIcon" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>
+    </div>
+
+    <audio id="bgMusic" loop preload="metadata">
+        <source src="Aliança.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <header>
+            <h1>Nossa História</h1>
+            <p class="subtitle">Um amor para toda vida</p>
+        </header>
+
+        <section class="timer-section">
+            <h2 class="timer-title">Juntos há...</h2>
+            <div class="timer-display">
+                <div class="time-unit">
+                    <span class="time-value" id="days">0</span>
+                    <span class="time-label">Dias</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="hours">0</span>
+                    <span class="time-label">Horas</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="minutes">0</span>
+                    <span class="time-label">Minutos</span>
+                </div>
+                <div class="time-unit">
+                    <span class="time-value" id="seconds">0</span>
+                    <span class="time-label">Segundos</span>
+                </div>
+            </div>
+        </section>
+
+        <section style="max-width: 900px; margin: 60px auto;">
+            <div class="message-card">
+                <p class="message-text">
+                    Desde o dia que você disse sim, cada momento ao seu lado se tornou especial. Você ilumina meus dias com seu sorriso e torna minha vida mais completa. Obrigado por ser minha parceira, minha melhor amiga e meu grande amor.
+                </p>
+                <p class="message-signature">— Com todo meu amor ♡</p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Cada segundo ao seu lado é um presente. Você me faz querer ser uma pessoa melhor todos os dias. Nosso amor é minha maior conquista, e prometo cuidar dele para sempre, como cuido de você.
+                </p>
+                <p class="message-signature">— Para sempre seu ♡</p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Quando penso no futuro, você está em cada sonho, em cada plano. Obrigado por escolher construir essa história comigo. Você é meu lar, minha paz e minha felicidade. Te amo mais a cada dia que passa.
+                </p>
+                <p class="message-signature">— Eternamente seu ♡</p>
+            </div>
+        </section>
+
+        <h2 class="gallery-title">Nossos Momentos Especiais</h2>
+        
+        <div class="slideshow-container" id="slideshowContainer">
+            <button class="nav-button prev" id="prevBtn">◀</button>
+            <button class="nav-button next" id="nextBtn">▶</button>
+            <div class="slide-controls" id="slideControls"></div>
+        </div>
+
+        <section style="max-width: 900px; margin: 60px auto 0;">
+            <h2 class="gallery-title" style="margin-bottom: 40px;">Uma Carta Especial Para Você</h2>
+            
+            <div class="message-card">
+                <p class="message-text">
+                    Meu amor,
+                </p>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Nossa história começou em <strong>23 de agosto</strong>.<br>
+                    Para muitos, apenas uma data comum...<br>
+                    Mas para mim, ela carrega um significado imenso.
+                </p>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Não foi só o início de um namoro,<br>
+                    foi o nosso primeiro passo rumo a algo muito maior,<br>
+                    algo verdadeiro e especial.
+                </p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Você é a pessoa mais incrível que Deus poderia colocar na minha vida,<br>
+                    e isso nunca vai mudar.<br>
+                    Podem existir distância e momentos difíceis,<br>
+                    mas nada disso será capaz de mudar o que eu realmente sinto por você.
+                </p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Eu prometo não soltar a sua mão.<br>
+                    Prometo estar ao seu lado em todos os momentos,<br>
+                    nos bons e nos ruins.
+                </p>
+            </div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    E se, por algum motivo, você se sentir só,<br>
+                    lembre-se sempre: <strong>eu estou aqui</strong>.
+                </p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="message-card">
+                <p class="message-text">
+                    Porque você é, simplesmente:
+                </p>
+                <p class="message-text" style="margin-top: 20px; font-size: 1.5rem; line-height: 1.6;">
+                    Minha melhor amiga<br>
+                    Minha morena<br>
+                    Meu amor<br>
+                    Minha princesa<br>
+                    Minha vida 💖
+                </p>
+            </div>
+        </section>
+
+        <footer>"Eu te amo um tão tão" ✨</footer>
+    </div>
+
+    <script>
+        console.log('🎯 Iniciando aplicação...');
+
+        // MÚSICA
+        const music = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = false;
+
+        music.addEventListener('loadedmetadata', () => {
+            console.log('✅ Música carregada!');
+        });
+
+        music.addEventListener('error', (e) => {
+            console.error('❌ Erro ao carregar música:', e);
+        });
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                isPlaying = false;
+                console.log('⏸️ Música pausada');
+            } else {
+                music.play()
+                    .then(() => {
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                        isPlaying = true;
+                        console.log('▶️ Música tocando!');
+                    })
+                    .catch(err => {
+                        console.error('❌ Erro ao tocar:', err);
+                        alert('Não foi possível tocar a música. Verifique se o arquivo está na pasta.');
+                    });
+            }
+        });
+
+        // CRONÔMETRO
+        const startDate = new Date('2025-08-23T00:00:00');
+        function updateTimer() {
+            const diff = new Date() - startDate;
+            document.getElementById('days').textContent = Math.floor(diff / 86400000);
+            document.getElementById('hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // SLIDESHOW
+        const photos = [
+            'foto1.jpeg', 'foto2.jpeg', 'foto3.jpeg', 'foto4.jpeg', 'foto5.jpeg',
+            'foto6.jpeg', 'foto7.jpeg', 'foto8.jpeg', 'foto9.jpeg', 'foto10.jpeg',
+            'foto11.jpeg', 'foto12.jpeg', 'foto13.jpeg', 'foto14.jpeg', 'foto15.jpeg'
+        ];
+        
+        const container = document.getElementById('slideshowContainer');
+        const controls = document.getElementById('slideControls');
+        let currentSlide = 0;
+        let loadedPhotos = 0;
+
+        console.log('📸 Carregando fotos...');
+
+        photos.forEach((photo, i) => {
+            const slide = document.createElement('div');
+            slide.className = 'slide' + (i === 0 ? ' active' : '');
+            
+            const img = document.createElement('img');
+            img.src = photo;
+            img.alt = `Foto ${i + 1}`;
+            
+            img.onload = function() {
+                loadedPhotos++;
+                console.log(`✅ ${photo} carregada (${loadedPhotos}/${photos.length})`);
+                slide.appendChild(img);
+            };
+            
+            img.onerror = function() {
+                console.error(`❌ Erro ao carregar ${photo}`);
+                slide.innerHTML = `<div class="error-msg">📷<br>Foto ${i + 1}<br>não encontrada</div>`;
+            };
+            
+            container.insertBefore(slide, controls);
+
+            const dot = document.createElement('div');
+            dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            controls.appendChild(dot);
+        });
+
+        function goToSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            currentSlide = n;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        document.getElementById('prevBtn').onclick = () => {
+            goToSlide((currentSlide - 1 + photos.length) % photos.length);
+        };
+        
+        document.getElementById('nextBtn').onclick = () => {
+            goToSlide((currentSlide + 1) % photos.length);
+        };
+
+        setInterval(() => {
+            goToSlide((currentSlide + 1) % photos.length);
+        }, 5000);
+
+        // CORAÇÕES FLUTUANTES
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '♡';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.color = Math.random() > 0.5 ? '#b8a5d4' : '#7d6b9d';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 15000);
+        }
+        
+        setInterval(createHeart, 800);
+        for (let i = 0; i < 3; i++) setTimeout(createHeart, i * 300);
+
+        console.log('✅ Aplicação iniciada!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Arquivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 { color: #7d6b9d; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        button {
+            background: #7d6b9d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #5d4b7d; }
+        img { max-width: 200px; margin: 10px; border: 2px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico de Arquivos</h1>
+
+    <div class="test-section">
+        <h2>🎵 Teste de Música</h2>
+        <audio id="testMusic" controls>
+            <source src="Aliança.mp3" type="audio/mpeg">
+        </audio>
+        <div id="musicStatus" class="status"></div>
+        <button onclick="testMusic()">Testar Música</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📸 Teste de Fotos</h2>
+        <div id="photoTest"></div>
+        <button onclick="testPhotos()">Testar Todas as Fotos</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📂 Estrutura de Arquivos Esperada</h2>
+        <pre>
+📁 Sua Pasta
+   ├── index.html (página principal)
+   ├── teste.html (este arquivo)
+   ├── Aliança_-_Tribalistas__lyric_video___3JiMr-HgHJ8_.mp3
+   ├── foto1.jpeg
+   ├── foto2.jpeg
+   ├── foto3.jpeg
+   ├── foto4.jpeg
+   ├── foto5.jpeg
+   ├── foto6.jpeg
+   ├── foto7.jpeg
+   ├── foto8.jpeg
+   ├── foto9.jpeg
+   ├── foto10.jpeg
+   ├── foto11.jpeg
+   ├── foto12.jpeg
+   ├── foto13.jpeg
+   ├── foto14.jpeg
+   └── foto15.jpeg
+        </pre>
+    </div>
+
+    <script>
+        const photos = [
+            'foto1.jpeg', 'foto2.jpeg', 'foto3.jpeg', 'foto4.jpeg', 'foto5.jpeg',
+            'foto6.jpeg', 'foto7.jpeg', 'foto8.jpeg', 'foto9.jpeg', 'foto10.jpeg',
+            'foto11.jpeg', 'foto12.jpeg', 'foto13.jpeg', 'foto14.jpeg', 'foto15.jpeg'
+        ];
+
+        function testMusic() {
+            const music = document.getElementById('testMusic');
+            const status = document.getElementById('musicStatus');
+            
+            if (music.error) {
+                status.className = 'status error';
+                status.innerHTML = `
+                    ❌ ERRO: Arquivo de música não encontrado!<br>
+                    <strong>Solução:</strong><br>
+                    1. Verifique se o arquivo "Aliança_-_Tribalistas__lyric_video___3JiMr-HgHJ8_.mp3" está na mesma pasta<br>
+                    2. Verifique se o nome está EXATAMENTE igual (incluindo underscores e pontos)
+                `;
+            } else {
+                music.play().then(() => {
+                    status.className = 'status success';
+                    status.innerHTML = '✅ Música carregada e tocando com sucesso!';
+                }).catch(err => {
+                    status.className = 'status error';
+                    status.innerHTML = `❌ Erro ao tocar: ${err.message}`;
+                });
+            }
+        }
+
+        function testPhotos() {
+            const container = document.getElementById('photoTest');
+            container.innerHTML = '<p>Testando fotos...</p>';
+            
+            let successCount = 0;
+            let errorCount = 0;
+            let results = '';
+
+            photos.forEach((photo, index) => {
+                const img = new Image();
+                
+                img.onload = function() {
+                    successCount++;
+                    results += `<div class="status success">✅ ${photo} - OK (${img.width}x${img.height}px)</div>`;
+                    container.innerHTML = results + `<p><strong>Total: ${successCount} OK, ${errorCount} Erros</strong></p>`;
+                    
+                    // Mostrar preview da primeira foto
+                    if (index === 0) {
+                        container.innerHTML += `<img src="${photo}" alt="Preview">`;
+                    }
+                };
+                
+                img.onerror = function() {
+                    errorCount++;
+                    results += `<div class="status error">❌ ${photo} - NÃO ENCONTRADA</div>`;
+                    container.innerHTML = results + `<p><strong>Total: ${successCount} OK, ${errorCount} Erros</strong></p>`;
+                };
+                
+                img.src = photo;
+            });
+        }
+
+        // Teste automático ao carregar
+        window.onload = () => {
+            // Testa a música automaticamente
+            const music = document.getElementById('testMusic');
+            const musicStatus = document.getElementById('musicStatus');
+            
+            music.addEventListener('loadeddata', () => {
+                musicStatus.className = 'status success';
+                musicStatus.innerHTML = '✅ Arquivo de música encontrado! Clique em "Testar Música" para ouvir.';
+            });
+            
+            music.addEventListener('error', () => {
+                musicStatus.className = 'status error';
+                musicStatus.innerHTML = `
+                    ❌ ERRO: Arquivo de música não encontrado!<br>
+                    <strong>Certifique-se que o arquivo está na mesma pasta com o nome exato:</strong><br>
+                    Aliança_-_Tribalistas__lyric_video___3JiMr-HgHJ8_.mp3
+                `;
+            });
+
+            // Testa as fotos automaticamente
+            setTimeout(testPhotos, 500);
+        };
+    </script>
+</body>
+</html>
